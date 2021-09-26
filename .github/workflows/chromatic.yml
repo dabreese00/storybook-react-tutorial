@@ -1,5 +1,6 @@
 # Workflow name
 name: 'Chromatic Deployment'
+# Fixed for yarn 2 see https://github.com/chromaui/action#yarn-2-support
 
 # Event for the workflow
 on: push
@@ -11,8 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - uses: actions/checkout@v1
-      - run: yarn
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: |
+          echo 'nodeLinker: "node-modules"' >> .yarnrc.yml
+          yarn rebuild
+          yarn build
         #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
