@@ -4,7 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
-/.yarn
+
+# yarn see https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+/.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/versions
 
 # testing
 /coverage
